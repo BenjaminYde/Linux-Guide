@@ -11,6 +11,8 @@ Want to see what topics are in todo? See the index per category.
 - [Electricity](./guide/electricity/_index.md)
   - [Electricity To Its Atom](./guide/electricity/electricity_to_its_atom.md)
   - [Current](./guide/electricity/current.md)
+  - [Voltage](./guide/electricity/voltage.md)
+  - [Resistor](./guide/electricity/resistor.md)
 - [Programming](README.md)
   - [Python (other guide of Benjamin)](https://github.com/BenjaminYde/Python-Guide)
   - [C++ (other guide of Benjamin)](https://github.com/BenjaminYde/CPlusPlus-Guide)
