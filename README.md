@@ -12,10 +12,25 @@ Want to see what topics are in todo? See the index per category.
   - [Electricity To Its Atom](./guide/electricity/electricity_to_its_atom.md)
   - [Current](./guide/electricity/current.md)
   - [Voltage](./guide/electricity/voltage.md)
-  - [Resistor](./guide/electricity/resistor.md)
+  - [Resistance](./guide/electricity/resistance.md)
+  - Todo: Ohm's Law
+  - Todo: Kirchhoff's Law
+  - Todo: Circuits
+  - Todo: ...
+- [Linux](./guide/linux/_index.md)
+  - [Welcome To Linux!](./guide/linux/about.md)
+  - [History](./guide/linux/history.md)
+  - [Open-Source Model](./guide/linux/opensource_model.md)
+  - Todo: File system
+  - Todo: Package management
+  - Todo: Terminal
+  - Todo: Shell scripting
+  - Todo: Processes
+  - Todo: User management
+  - Todo: Dual Boot
+  - Todo: ...
 - [Programming](README.md)
-  - [Python (other guide of Benjamin)](https://github.com/BenjaminYde/Python-Guide)
-  - [C++ (other guide of Benjamin)](https://github.com/BenjaminYde/CPlusPlus-Guide)
-
-- TODO
-  - Linux
+  - [Python](https://github.com/BenjaminYde/Python-Guide) ( other guide of Benjamin )
+  - [C++](https://github.com/BenjaminYde/CPlusPlus-Guide) ( other guide of Benjamin )
+- [Docker ](README.md)
+  - Todo
