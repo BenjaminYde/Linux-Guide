@@ -21,7 +21,8 @@ Want to see what topics are in todo? See the index per category.
   - [Welcome To Linux!](./guide/linux/about.md)
   - [History](./guide/linux/history.md)
   - [Open-Source Model](./guide/linux/opensource_model.md)
-  - [File system](./file_system.md)
+  - [File system](./guide/linux/file_system.md)
+  - [Users and Permissions](./guide/linux/users_and_permissions.md)
   - Todo: Package management
   - Todo: Terminal
   - Todo: Shell scripting
