@@ -23,6 +23,7 @@ Want to see what topics are in todo? See the index per category.
   - [Open-Source Model](./guide/linux/opensource_model.md)
   - [Package Management](./guide/linux/package_management.md)
   - [File system](./guide/linux/file_system.md)
+  - [Terminal Commands](./guide/linux/terminal.md)
   - [Users and Permissions](./guide/linux/users_and_permissions.md)
   - Todo: Terminal
   - Todo: Shell scripting
