@@ -1,4 +1,7 @@
-# The Terminal
+---
+sidebar_position: 5
+title: Terminal Commands
+---
 
 The terminal in Linux is an interface in which you can type and execute text-based commands. It allows for efficient management of the operating system and software, providing a direct way to interact with the system's kernel and services. Unlike graphical user interfaces (GUIs), the terminal provides a lightweight, more controlled, and scriptable way of interacting with the computer.
 
@@ -135,6 +138,15 @@ The terminal in Linux is an interface in which you can type and execute text-bas
   - Examples:
     - `ps aux` (Shows all running processes.)
     - `ps aux | grep firefox` (Shows all running processes, filtered to include only those containing "firefox".)
+- `nohup COMMAND &`: Executes a command that continues running in the background, immune to hangup signals.
+  - `nohup`: A command that ensures a process continues to run after the terminal is closed by making it ignore the HUP (hangup) signal. This signal is typically sent when the terminal session is terminated, which would normally stop any running processes. nohup is useful for long-running operations that need to persist beyond a terminal session.
+  - `&`: Appends to a command to execute it as a background job, allowing immediate return to the shell for further commands. This symbol is crucial for multitasking in a Unix/Linux environment, facilitating parallel process management.
+  - Examples:
+    - `nohup python script.py &` (Runs script.py in the background, ensuring it continues even if the terminal closes.)
+- `Ctrl+Z`: Suspends a foreground process, moving it to the background in a stopped state. This allows the terminal to return to the prompt for other tasks while keeping the process's state intact.
+- `jobs`: Lists all jobs with their statuses, useful for tracking suspended processes.
+  - `bg`: Resumes a suspended job in the background (e.g., `bg %1` resumes job 1). If no job number is specified, bg resumes the most recent job.
+  - `fg`: Moves a job into the foreground, continuing its execution interactively (e.g., `fg %1` for job 1). If no job is specified, fg affects the most recent job.
 
 ### System Resource and Information
 
