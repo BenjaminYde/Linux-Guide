@@ -1,7 +1,4 @@
----
-sidebar_position: 10
-title: Dual Boot
----
+# Dual Boot
 
 ## Install a Second SSD
 
