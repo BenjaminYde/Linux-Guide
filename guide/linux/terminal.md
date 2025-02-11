@@ -79,9 +79,26 @@ Copies files and directories:
 
 #### `rm`
 
+Command that permanently deletes files and directories. There is no "trash" or "recycle bin" by default. Once you delete something with rm, it's usually gone for good.
+- `rm myfile.txt`: Removes 1 file.
+- `rm file1.txt file2.txt file3.txt`: Removes multiple files.
+- `rm *.txt`: Removes files using wildcards.
+- `rm -d my_empty_directory/`: Removes an empty directory.
+- `rm -r my_directory/`: Removes a directory and its contents (recursively).
+- `rm -f file.txt`: Force deletion.
 
-markdown
-Copy code
+#### `trash-cli`
+
+Command-line interface for the "Trash" or "Recycle Bin" functionality that you typically find in graphical desktop environments (like GNOME).
+This utility moves files and directories to the Trash: Instead of permanently deleting them, you send them to a temporary holding area from which they can be recovered.
+
+- `trash-put myfile.txt`: Trash a single file
+- `trash-put file1.txt file2.txt`: Trash multiple files
+- `trash-put my_directory/`: Trash a directory (and its contents)
+- `trash-put *.txt`: Trash all .txt files in the current directory
+- `trash my_directory`: Trash a directory
+
+
 ## File Management Commands
 
 ### Basic Commands
