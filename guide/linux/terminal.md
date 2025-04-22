@@ -531,6 +531,47 @@ Unsets environment variables in the current shell session:
 Prints the value of a specific environment variable:
 - `printenv PATH`: Displays the `PATH` variable.
 
+## Devices
+
+#### `lspci`
+
+List all PCI devices
+
+- `lspci`: List all PCI devices briefly.
+- `lspci | grep -i ethernet`: List the ethernet controller.
+- `lspci | grep -i network`: List the network controller.
+
+#### `lscpu`
+
+Displays detailed information about the CPU architecture.
+
+#### `lsusb`
+
+Lists all USB devices connected to the system.
+
+-  `lsusb`: List USB hubs and connected devices.
+-  `lsusb -t`: Show USB devices in a tree view, indicating hierarchy and speed.
+-  `lsusb -v`: Show verbose output for each USB device (may require `sudo` for full details).
+
+#### `lsblk`
+
+Lists block devices (hard drives, SSDs, USB drives, etc.) and their partitions.
+
+- `lsblk`: Shows devices, partitions, sizes, and mount points in a tree format.
+- `lsblk -f`: Includes information about filesystem types, UUIDs, and labels.
+- `lsblk -m`: Shows permissions and ownership information.
+
+#### `lshw`
+
+Lists detailed hardware configuration of the machine. Often requires `sudo` for full details.
+
+-   `lshw`: Displays a comprehensive list of all detected hardware (can be very long).
+-   `lshw -class network`: Displays detailed information specifically about network interfaces.
+-   `lshw -class disk`: Displays detailed information about disk drives.
+-   `lshw -class storage`: Displays detailed information about storage controllers.
+-   `lshw -class display`: Displays detailed information about display adapters (graphics cards).
+-   `lshw -class memory`: Displays detailed information about memory (system RAM, caches).
+
 ## Networking Commands
 
 > [!NOTE]
@@ -585,3 +626,18 @@ Connects to a remote system securely:
 - `ssh -A user@hostname`: Logs into `hostname` as `user` with ssh agent forwarding.
 - `ssh user@hostname "ls -l /path/to/directory"`: Runs the command on the remote system and displays the output locally.
 - `ssh-copy-id user@hostname`: Installs your public key on the remote system for passwordless login.
+
+#### `nmcli`
+
+Command-line tool for controlling NetworkManager. Essential on systems using NetworkManager (common on modern desktops and servers like Ubuntu, Fedora, CentOS/RHEL).
+
+- `nmcli general status`: Show overall NetworkManager status and connectivity state.
+- `nmcli device status` or `nmcli dev`: List network devices and their current state (connected, disconnected, etc.).
+- `nmcli connection show` or `nmcli con show`: List all configured network connections.
+- `nmcli connection show --active`: List only active connections.
+- `nmcli device wifi list`: Scan for and list available Wi-Fi networks.
+- `nmcli device wifi connect <SSID> password <password>`: Connect to a specific Wi-Fi network.
+- `nmcli connection up <connection_name_or_uuid>`: Activate a specific configured connection.
+- `nmcli connection down <connection_name_or_uuid>`: Deactivate a specific connection.
+- `nmcli radio wifi off`: Turn off Wi-Fi.
+- `nmcli radio wifi on`: Turn on Wi-Fi.

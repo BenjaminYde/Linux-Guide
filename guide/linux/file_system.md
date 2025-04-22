@@ -179,3 +179,87 @@ the process with that particular pid.
 ### /srv (Service Data)
 
 - Contains data for services provided by the system, such as serving websites or file storage.
+
+## Managing Storage Devices
+
+Working with Linux often involves managing storage devices like hard drives (HDDs), solid-state drives (SSDs), or USB drives.
+
+### Listing Storage Devices
+
+Understanding the storage devices connected to your Linux system is crucial for efficient system management. The `lsblk` command, short for “list block devices,” is a powerful tool that provides detailed information about block devices such as hard drives, solid-state drives, and other storage-related devices.
+
+- List all devices: `lsblk`
+- See what the command can do: `lsblk --help`
+- List only nvme devices (non-tree): `lsblk -N`
+- List only nvme devices with partitions: `lsblk | grep nvme`
+- List only nvme devices with partitions with custom columns you want: `lsblk -o NAME,MODEL,TYPE,FSUSE%,SIZE,FSTYPE | grep nvme`
+  - Tip: you must use capitals, autocompletion is available (tab).
+
+### Understanding Device Names
+
+Linux uses specific naming conventions in the `/dev` directory:
+
+- `sdX`: Typically represents SATA, SCSI, SAS, and USB storage devices.
+  - `sda`: First detected disk.
+  - `sdb`: Second detected disk, etc.
+  - `sda1`: First partition on the sda disk.
+  - `sda2`: Second partition on the sda disk, etc.
+- `nvmeXnYpZ`: Represents NVMe (Non-Volatile Memory Express) SSDs, common on modern systems (often M.2 slots).
+  - `nvme0n1`: First NVMe disk (Controller 0, Namespace 1).
+  - `nvme1n1`: Second NVMe disk (Controller 1, Namespace 1).
+  - `nvme0n1p1`: First partition on the nvme0n1 disk.
+  - `nvme0n1p2`: Second partition on the nvme0n1 disk.
+- `hdX`: Older convention for IDE (PATA) hard drives. Less common now. hda is the first, hdb the second, etc. Partitions are hda1, hda2.
+- `vdX`: Virtual disks, often seen in KVM/QEMU virtualization environments (vda, vdb, etc.).
+- `loopX`: Loopback devices, used to mount files as block devices (e.g., mounting an .iso file, used by Snap packages).
+
+### Adding and Preparing a New Storage NVME Device
+
+1. **Install the new disk on your motherboard and reboot**.
+   -  Check if your new NVME disk is found using `lsblk -N`.
+   -  For example, `nvme1n1` may be your new disk.
+2. **Partition the Disk (Optional)**: WARNING: These steps involve partitioning and formatting, which **DESTROYS ALL DATA** on the target device. Double-check you are working on the correct device (`/dev/nvme1n1` in this example).
+   - Partition using: `sudo fdisk /dev/<disk>`
+     - `g` (to create a new empty GPT partition table - recommended) or o (for older MBR).
+     - `n` (to add a new partition). Accept defaults to use the whole disk.
+     - `p` (to print the partition table and verify).
+     - `w` (to write the changes to disk and exit).
+3. **Create the Filesystem (Formatting)**: Now, format the partition (`/dev/nvme1n1p1`, not the disk `/dev/nvme1n1`) with the ext4 filesystem.
+   - Use the command: `sudo mkfs -t ext4 /dev/nvme1n1p1`
+4. **Create a Mount Point**: This is an empty directory where the filesystem will be attached.
+```sh
+# Example: Create a directory named 'data' under /mnt with the correct permissions of the user
+sudo mkdir /mnt/data
+sudo chown -R 1000:1000 /mnt/data
+sudo chmod 764 /mnt/data
+```
+5. **Mount Manually (Temporary)**: Mount the filesystem to test it.
+```sh
+# Example mount the disk to a folder: sudo mount <disk> <folder>
+sudo mount /dev/<nvme0n1> /mnt/data
+```
+You should now be able to access the drive via /mnt/data. Check with `df -h`.
+6. **Mount Automatically on Startup**: To make the mount permanent across reboots, you need to add an entry to `/etc/fstab`. It's best practice to use the UUID (Universally Unique Identifier) of the filesystem, as device names like `/dev/sdb1` can sometimes change.
+- Find UUID: `blkid | grep nvme`
+- Edit the `/etc/fstab` (filesystem table): `sudo nano /etc/fstab`
+  - Add `UUID=<uuid> <target-folder>  ext4 defaults 1 1`
+  - For example: `UUID=2ab35ffc-9fde-433a-a19f-18254c088ad7 /mnt/data ext4 defaults 1 1`
+- Reboot to see if it automatically mounts
+
+### Copy NVME to another NVME
+
+To clone the ENTIRE disk (including partition table, bootloader, all partitions):
+
+- `sudo dd if=/dev/nvme0n1 of=/dev/nvme1n1 bs=64K conv=noerror,sync status=progress`
+  - `if=`: Input file (source)
+  - `of=`: Output file (target)
+  - `bs=64K`: Block size (e.g., 64K, 1M, 4M - larger can be faster but test).
+  - `conv=noerror,sync`: Tells dd to continue on read errors, padding errors with null bytes. Important for - potentially failing drives.
+  - `status=progress`: Shows progress during the copy. 
+  **WARNING**: Ensure `if=` and `of=` are correct. Reversing them will WIPE your source drive!
+
+### Advanced commands using `nvme-cli`
+
+To use `nvme`, install it with `sudo apt install nvme-cli`.
+
+- List NVME devices: `nvme list`.

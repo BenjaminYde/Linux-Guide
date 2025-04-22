@@ -15,6 +15,7 @@ The following index contains categories with topics that are ready for visibilit
   - [Terminal Commands](./guide/linux/terminal.md)
   - [Users and Permissions](./guide/linux/users_and_permissions.md)
   - [Dual Boot](./guide/linux/dual_boot.md)
+  - [Common Ubuntu Setup](./guide/linux/ubuntu_setup.md)
   - Todo: Shell scripting
   - Todo: Processes
 - [Programming](README.md)
