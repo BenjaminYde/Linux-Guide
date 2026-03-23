@@ -1,21 +1,26 @@
 # Docker Install
 
-## Linux
+## Linux (Ubuntu)
 
-Compared with Windows, it's very simple because Docker is made for Linux and not Windows. You can find the official docker engine installation steps [here](https://docs.docker.com/engine/install/ubuntu/).
+You can find the official docker engine installation steps below:
+1. Install: https://docs.docker.com/engine/install/ubuntu/
+2. Post-Install: https://docs.docker.com/engine/install/linux-postinstall/
 
-## Windows (using WSL)
+## Windows (using WSL2)
 
 ### Install WSL2
 
-Windows Subsystem for Linux (WSL) 2 is a full Linux kernel built by Microsoft, which allows Linux distributions to run without managing virtual machines. With Docker Desktop running on WSL 2, users can leverage Linux workspaces and avoid maintaining both Linux and Windows build scripts. In addition, WSL 2 provides improvements to file system sharing and boot time.
+The Windows Subsystem for Linux (WSL) 2 lets you run a genuine Linux environment directly on Windows, eliminating the hassle of a traditional dual-boot setup or a clunky virtual machine (VM).
+
+It features a full Linux kernel built and managed by Microsoft, providing deep integration and near-native performance. For developers, this is a game-changer. You can run Docker, use Linux command-line tools, and manage development environments exactly as you would on a Linux server, all without ever leaving Windows. This unified workflow means you no longer need to maintain separate build scripts for Windows and Linux.
 
 > [!NOTE]  
-> You do not need Hyper-V when using WSL2. WSL2 is a separate virtualization technology that does not rely on Hyper-V. In fact, WSL2 uses a lightweight utility VM that leverages the Windows Hypervisor Platform (WHPX), which is a different component from Hyper-V.
->
+> **Good to Know: WSL 2 vs. Hyper-V:**
+> 
+> You do not need to enable the full "Hyper-V" Windows Feature to use WSL 2.
 > When you're using Docker Desktop with WSL2, you can run Linux containers directly on top of WSL2 without the need for Hyper-V. This provides better performance and resource usage compared to using Docker with the Hyper-V backend.
 > 
-> However, note that if you want to use both WSL2 and Hyper-V on the same Windows system, you can do so without any issues, as they can coexist without any conflicts.
+> While WSL 2 uses Microsoft's underlying virtualization technology (the Windows Hypervisor Platform), it operates as a separate, more lightweight component. Docker Desktop leverages this WSL 2 integration directly, providing significantly better performance than its older, legacy Hyper-V backend.
 
 > [!CAUTION]
 > File system performance is critical for development. In WSL, the performance can be significantly lower when working on the Windows file system (mounted under /mnt/c/ or similar). To improve performance, move your code project to the Linux file system, which is typically faster.
@@ -39,15 +44,17 @@ As Default "Ubuntu" is installed, this is the latest LTS distro of linux.
 When running the `wsl -l` command, no version is explicitly specified in the name of the distro.
 It is recommended to install a custom distro from the MS Store, these distro's have the version in the name.
 
-### Install Ubuntu 22.04 LTS
+### Install Ubuntu 24.04 LTS
 
 1. Go to the MS Store
 2. Search for "Ubuntu"
-3. Download Ubuntu 22.04 LTS and Open it
+3. Download Ubuntu 24.04 LTS and Open it
 4. Wait for installation and enter your username & pass
 5. Installation is complete now, verify in windows powershell (as admin) with the following command: `wsl -l -v`
-6. Set the Ubuntu 22.04 LTS as default distro with the following command: `wsl --set-default-version <distro-name>`
+6. Set the Ubuntu 24.04 LTS as default distro with the following command: `wsl --set-default-version <distro-name>`
 7. Remove the other Ubuntu distro with the following command: `wsl --unregister <distro-name>`
+
+![alt text](./static/docker_install/ms_store_ubuntu_wsl.png)
 
 ### Install Docker Engine
 
